@@ -21,29 +21,33 @@ public class CommentForCat {
         this.fileName = fileName;
     }
 
-    private CommentForCat(String text, String commentedCode, String methodName,
-                          String className, int lineStartNumber, int lineEndNumber) {
+    private CommentForCat(String text, String commentedCode,CommentLocation location,
+                          int lineStartNumber, int lineEndNumber,CommentType type) {
         this.text = text;
         this.commentedCode = commentedCode;
-        this.methodName = methodName;
-        this.className = className;
         this.lineStartNumber = lineStartNumber;
         this.lineEndNumber = lineEndNumber;
+        this.commentLocation = location;
+        this.commentType = type;
     }
 
-    public CommentForCat convertFromComment(Comment comment){
+    public static CommentForCat convertFromComment(Comment comment){
         String text = comment.getContent();
         CommentType commentType = getCommentType(comment);
         CommentLocation commentLocation = getCommentLocation(comment);
+        int lineStartNumber = getLineStartNumber(comment);
+        int lineEndNumber = getLineEndNumber(comment);
+        String commentedCode = getCommentedCode(comment);
+        return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType);
 
     }
 
-    private CommentType getCommentType(Comment comment){
+    private static CommentType getCommentType(Comment comment){
         if (comment.isJavadocComment()) return CommentType.DocumentComment;
         else return CommentType.RegularComment;
     }
 
-    private CommentLocation getCommentLocation(Comment comment){
+    private static CommentLocation getCommentLocation(Comment comment){
         if(!comment.getCommentedNode().isPresent()) return  CommentLocation.OrphanComment;
         Node node = comment.getCommentedNode().get();
         if (node instanceof ClassOrInterfaceDeclaration) return CommentLocation.ClassTopComment;
@@ -63,6 +67,18 @@ public class CommentForCat {
 
     }
 
+    private static int getLineStartNumber(Comment comment){
+        return comment.getRange().get().begin.line;
+    }
+    private static int getLineEndNumber(Comment comment){
+        return comment.getRange().get().end.line;
+    }
+
+    private static String getCommentedCode(Comment comment){
+        if (! comment.getCommentedNode().isPresent())
+            return null;
+        return comment.getCommentedNode().get().removeComment().toString();
+    }
 
 
 }
