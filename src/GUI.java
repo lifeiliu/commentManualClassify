@@ -17,9 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
@@ -192,14 +190,19 @@ public class GUI extends Application {
                 + "-fx-text-fill: orange;");
 
         saveToFile.setOnAction(e -> {
+            String filePath = sourceCodeFile.getPath() + ".json";
             try {
-                FileWriter fw = new FileWriter(sourceCodeFile.getPath()+".json");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
                 for (CommentForCat each : commentsFromFile){
-                    fw.write(each.saveToJson());
+                    bw.write(each.saveToJson());
                 }
+                bw.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
+                System.out.println("write failed");
+
             }
+
 
         });
 
