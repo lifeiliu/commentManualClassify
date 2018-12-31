@@ -3,6 +3,10 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.Comment;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
 
 public class CommentForCat {
     public String text;
@@ -29,6 +33,10 @@ public class CommentForCat {
         this.lineEndNumber = lineEndNumber;
         this.commentLocation = location;
         this.commentType = type;
+    }
+
+    public void setCommentCategory (CommentCategory category){
+        this.commentCategory = category;
     }
 
     public static CommentForCat convertFromComment(Comment comment){
@@ -85,6 +93,12 @@ public class CommentForCat {
             return lineStartNumber + text.substring(0,50);
         }
         return lineStartNumber + text;
+    }
+
+    public String saveToJson (){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(this);
+        return json;
     }
 
 
