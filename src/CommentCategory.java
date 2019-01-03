@@ -11,10 +11,12 @@ public enum CommentCategory {
     Misleading,
     Journal,
     Noise,
+    BetterNameNeeded,
     ClosingBrace,
     Atrributions,
     CommentedOut,
     NonLocalInfo,
+    TooMuchInfo,
     JavaDoc,
     AlgorithmSummary,
     OtherUndefined

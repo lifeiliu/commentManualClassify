@@ -1,4 +1,6 @@
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
@@ -193,9 +195,11 @@ public class GUI extends Application {
             String filePath = sourceCodeFile.getPath() + ".json";
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-                for (CommentForCat each : commentsFromFile){
+                /*for (CommentForCat each : commentsFromFile){
+
                     bw.write(each.saveToJson());
-                }
+                }*/
+                bw.write(new Gson().toJson(commentsFromFile));
                 bw.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
