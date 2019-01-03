@@ -28,10 +28,12 @@ import java.util.List;
 public class GUI extends Application {
 
     File sourceCodeFile;
+
     BorderPane root;
     TextArea comment;
     TextArea code;
     TextField location;
+    TextField pathTextField;
     CommentForCat currentSeclectItem;
     ChoiceBox<CommentCategory> category;
     static List<CommentForCat> commentsFromFile;
@@ -60,13 +62,16 @@ public class GUI extends Application {
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
 
+        Label label = new Label("source file folder");
+        pathTextField = new TextField();
+
         Button openfile = new Button("open java file");
         openfile.setOnAction(e->
             sourceCodeFile = openfile()
         );
         Button showCommentList = new Button("show Comments in file");
         showCommentList.setOnAction(e -> showCommentList());
-        hbox.getChildren().addAll(openfile,showCommentList);
+        hbox.getChildren().addAll(label,pathTextField,openfile,showCommentList);
         return hbox;
     }
 
@@ -234,7 +239,13 @@ public class GUI extends Application {
 
     private File openfile(){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        String initialDirectoryPath;
+        if (pathTextField.getText() != null){
+            initialDirectoryPath = pathTextField.getText().trim();
+        }else{
+            initialDirectoryPath = System.getProperty("user.home");
+        }
+        fileChooser.setInitialDirectory(new File(initialDirectoryPath));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("java source code","*.java"));
         return fileChooser.showOpenDialog(new Stage());
 

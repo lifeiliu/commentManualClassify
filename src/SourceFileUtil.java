@@ -4,6 +4,8 @@ import com.github.javaparser.ast.comments.Comment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,16 +41,26 @@ public class SourceFileUtil {
     }
 
     private static List combineMultiLineComment (List<Comment> comments){
-        for (int i = 0; i < comments.size() - 1; i++){
+        comments.sort(new Comparator<Comment>() {
+            @Override
+            public int compare(Comment o1, Comment o2) {
+                return o1.getRange().get().begin.line - o2.getRange().get().begin.line;
+            }
+        });
+        if (comments.size() < 1) return comments;
+        for (int i = 1; i < comments.size() - 1; i++){
 
-            if (comments.get(i).isOrphan() && comments.get(i).getEnd().get().line == comments.get(i+1).getBegin().get().line - 1 ) {
-                comments.get(i + 1).setContent(comments.get(i).getContent() + comments.get(i+1).getContent());
-                comments.remove(i);
+            if ((comments.get(i).isOrphan() || comments.get(i-1).isOrphan()) && comments.get(i-1).getEnd().get().line
+                    == comments.get(i).getBegin().get().line - 1 ) {
+                comments.get(i).setContent(comments.get(i - 1).getContent() +" "+ comments.get(i).getContent());
+                comments.remove(i - 1);
                 i--;
             }
         }
         return comments;
     }
+
+
 
     /*public static void main(String[] args){
         System.out.println(verifySourceCode(new File("/home/ggff/Desktop/sourceCode/crawl4j/AuthInfo.java")));
