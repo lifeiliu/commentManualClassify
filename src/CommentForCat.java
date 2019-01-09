@@ -26,13 +26,16 @@ public class CommentForCat {
     }
 
     private CommentForCat(String text, String commentedCode,CommentLocation location,
-                          int lineStartNumber, int lineEndNumber,CommentType type) {
+                          int lineStartNumber, int lineEndNumber,CommentType type,
+                          String className,String methodName) {
         this.text = text;
         this.commentedCode = commentedCode;
         this.lineStartNumber = lineStartNumber;
         this.lineEndNumber = lineEndNumber;
         this.commentLocation = location;
         this.commentType = type;
+        this.className = className;
+        this.methodName = methodName;
     }
 
     public void setCommentCategory (CommentCategory category){
@@ -46,7 +49,10 @@ public class CommentForCat {
         int lineStartNumber = getLineStartNumber(comment);
         int lineEndNumber = getLineEndNumber(comment);
         String commentedCode = getCommentedCode(comment);
-        return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType);
+        String className = getClassName(comment);
+        String methodName = getMethodName(comment);
+
+        return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType,className,methodName);
 
     }
 
@@ -72,6 +78,46 @@ public class CommentForCat {
             node = node.getParentNode().get();
         }
         return CommentLocation.OtherLocation;
+
+    }
+
+    private static String getClassName(Comment comment){
+        if(! comment.getCommentedNode().isPresent()){
+            return "UNKNOWN_CLASS_NAME";
+        }
+        Node commentedNode = comment.getCommentedNode().get();
+        if (commentedNode instanceof  ClassOrInterfaceDeclaration){
+            return ((ClassOrInterfaceDeclaration) commentedNode).getNameAsString();
+        }
+        while (commentedNode.getParentNode().isPresent()){
+            Node parentNode = commentedNode.getParentNode().get();
+            if (parentNode instanceof ClassOrInterfaceDeclaration){
+                return ((ClassOrInterfaceDeclaration) parentNode).getNameAsString();
+            }else
+                commentedNode = parentNode;
+        }
+        return "UNKNOWN_CLASS_NAME";
+
+    }
+
+    private static String getMethodName(Comment comment){
+        CommentLocation location = getCommentLocation(comment);
+        if (location == CommentLocation.MethodTopComment){
+            MethodDeclaration node = (MethodDeclaration) comment.getCommentedNode().get();
+            return node.getNameAsString();
+
+        }
+        if (location == CommentLocation.MethodFieldComment || location == CommentLocation.MethodInnerComment){
+            Node node = comment.getCommentedNode().get();
+            while (node.getParentNode().isPresent()){
+                Node parent = node.getParentNode().get();
+                if (parent instanceof MethodDeclaration){
+                    return ((MethodDeclaration) parent).getNameAsString();
+                }else
+                    node = parent;
+            }
+        }
+        return "UNDEFINED_METHOD_NAME";
 
     }
 

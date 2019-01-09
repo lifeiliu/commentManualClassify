@@ -32,7 +32,7 @@ public class GUI extends Application {
     BorderPane root;
     TextArea comment;
     TextArea code;
-    TextField location;
+    TextField location, classNameTF, methodNameTF, fileNameTF;
     TextField pathTextField;
     CommentForCat currentSeclectItem;
     ChoiceBox<CommentCategory> category;
@@ -69,9 +69,12 @@ public class GUI extends Application {
         openfile.setOnAction(e->
             sourceCodeFile = openfile()
         );
+        Label label1 = new Label("File Name: ");
+        fileNameTF = new TextField();
+
         Button showCommentList = new Button("show Comments in file");
         showCommentList.setOnAction(e -> showCommentList());
-        hbox.getChildren().addAll(label,pathTextField,openfile,showCommentList);
+        hbox.getChildren().addAll(label,pathTextField,openfile,fileNameTF,showCommentList);
         return hbox;
     }
 
@@ -114,7 +117,9 @@ public class GUI extends Application {
                     location.setText(null);
                     location.appendText(currentSeclectItem.commentLocation.toString());
                     category.setValue(currentSeclectItem.commentCategory);
-
+                    fileNameTF.setText(currentSeclectItem.fileName);
+                    classNameTF.setText(currentSeclectItem.className);
+                    methodNameTF.setText(currentSeclectItem.methodName);
 
                 }
             });
@@ -143,18 +148,24 @@ public class GUI extends Application {
 
         Label commentText = new Label("Comment Text");
         Label commentedCode = new Label("Commented Code");
+        Label className = new Label("Class Name");
+        Label methodName = new Label("Method Name");
 
         location = new TextField();
+        classNameTF = new TextField();
+        methodNameTF = new TextField();
+
         comment = new TextArea();
-        comment.setPrefSize(550,200);
+        comment.setPrefSize(550,150);
         comment.setEditable(false);
         code = new TextArea();
-        code.setPrefSize(550,500);
+        code.setPrefSize(550,400);
         code.setEditable(false);
 
 
 
-        vBox.getChildren().addAll(location,commentText,comment,commentedCode,code);
+        vBox.getChildren().addAll(location,className,classNameTF,methodName,methodNameTF,
+                commentText,comment,commentedCode,code);
 
         return vBox;
     }
@@ -204,7 +215,7 @@ public class GUI extends Application {
 
                     bw.write(each.saveToJson());
                 }*/
-                bw.write(new Gson().toJson(commentsFromFile));
+                bw.write(new GsonBuilder().setPrettyPrinting().create().toJson(commentsFromFile));
                 bw.close();
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -235,6 +246,7 @@ public class GUI extends Application {
 
         VBox categoryChoiceBox = addChoiceBoxforCategory();
         root.setRight(categoryChoiceBox);
+
     }
 
     private File openfile(){

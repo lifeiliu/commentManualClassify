@@ -25,6 +25,9 @@ public class SourceFileUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        for (CommentForCat comment : result){
+            comment.fileName = sourceCodeFile.getName();
+        }
         return result;
 
     }
