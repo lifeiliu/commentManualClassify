@@ -6,7 +6,8 @@ import java.util.*;
 
 public class StatisticsFromJson {
 
-    private static HashMap<CommentCategory, Integer> statistics = new HashMap<>();
+
+    private static HashMap<String, HashMap<CommentCategory, Integer>> fileStatic = new HashMap<>();
 
     public static void main(String[] args){
         final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/crawl4j");
@@ -15,17 +16,23 @@ public class StatisticsFromJson {
                 -> pathname.getName().endsWith(extension)));
 
         for (File file : jsonFiles){
-            System.out.println(file.getName());
             parseFile(file);
         }
+
+        fileStatic.forEach((k,v)-> {
+            System.out.print(k +": ");
+            System.out.println(v);
+
+
+        });
     }
 
     private static void parseFile(File jsonFile){
         Gson gson = new Gson();
-        //Type collectionType = new TypeToken<Collection<CommentForCat>>(){}.getType();
+        HashMap<CommentCategory, Integer> statistics = new HashMap<>();
 
         try {
-            //BufferedReader br = new BufferedReader(new FileReader(jsonFile));
+
             JsonReader jsonReader = new JsonReader(new FileReader(jsonFile));
             CommentForCat[] comments = gson.fromJson(jsonReader,CommentForCat[].class);
             for (CommentForCat comment: comments){
@@ -37,6 +44,8 @@ public class StatisticsFromJson {
                             new Integer(statistics.get(comment.commentCategory).intValue()+1));
 
                 }
+
+
             }
 
             jsonReader.close();
@@ -48,7 +57,8 @@ public class StatisticsFromJson {
             e.printStackTrace();
         }
 
-        System.out.println(statistics);
+        fileStatic.put(jsonFile.getName(),statistics);
+
     }
 
 
