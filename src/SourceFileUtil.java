@@ -1,10 +1,12 @@
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,23 +16,69 @@ public class SourceFileUtil {
 
     public static List<CommentForCat> getCommentsFromFile(File sourceCodeFile) throws Exception {
         List<CommentForCat> result = new LinkedList<>();
+        List<FunctionMap> functionMaps = getFunctionMapFormFile(sourceCodeFile);
+        /*  //test
+            functionMaps.forEach(e->{
+            System.out.println(e.functionName);
+            System.out.println(e.className);
+            System.out.println("Start "+e.startLine + " End: "+e.endLine);
+            System.out.println(e.comments);
+        });*/
+
         if (!verifySourceCode(sourceCodeFile)) throw new Exception("not java file");
         try {
             CompilationUnit cu = JavaParser.parse(sourceCodeFile);
             List<Comment> comments = cu.getComments();
             List<Comment> combinedComments = combineMultiLineComment(comments);
             for (Comment comment : combinedComments){
-                result.add(CommentForCat.convertFromComment(comment));
+                CommentForCat newCommentToResult = CommentForCat.convertFromComment(comment);
+                for (FunctionMap map: functionMaps){
+                    if (map.comments.contains(comment)){
+                        newCommentToResult.methodName = map.functionName;
+                        newCommentToResult.className = map.className;
+                    }
+
+                }
+                result.add(newCommentToResult);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         for (CommentForCat comment : result){
             comment.fileName = sourceCodeFile.getName();
+
         }
         return result;
 
     }
+
+    public static List<FunctionMap> getFunctionMapFormFile(File sourceCodeFile) throws Exception{
+        List<FunctionMap> results = new ArrayList<>();
+        if (!verifySourceCode(sourceCodeFile)) throw new Exception("not java file");
+        CompilationUnit cu = JavaParser.parse(sourceCodeFile);
+        List<MethodDeclaration> methodDeclarations = cu.findAll(MethodDeclaration.class);
+        List<ClassOrInterfaceDeclaration> classes = cu.findAll(ClassOrInterfaceDeclaration.class);
+        List<ClassMap> classMaps = new ArrayList<>();
+        for (ClassOrInterfaceDeclaration clazz : classes){
+            ClassMap classMap = ClassMap.getClassMap(clazz);
+            classMaps.add(classMap);
+        }
+        for (MethodDeclaration method : methodDeclarations){
+            FunctionMap functionMap = FunctionMap.createFunctionMap(method);
+            functionMap.fileName = sourceCodeFile.getName();
+            for(ClassMap classMap : classMaps){
+                if (classMap.methods.contains(method)){
+                    functionMap.className = classMap.className;
+                }
+            }
+            results.add(functionMap);
+
+        }
+        return results;
+    }
+
+
 
     private static boolean verifySourceCode(File sourceCodeFile){
         String fileName = sourceCodeFile.getName();
@@ -65,7 +113,12 @@ public class SourceFileUtil {
 
 
 
-    /*public static void main(String[] args){
-        System.out.println(verifySourceCode(new File("/home/ggff/Desktop/sourceCode/crawl4j/AuthInfo.java")));
+  /*  public static void main(String[] args){
+      File file = new File("/home/ggff/Desktop/sourceCode/crawl4j/HtmlContentHandler.java");
+        try {
+            getCommentsFromFile(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }*/
 }
