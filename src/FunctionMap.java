@@ -1,8 +1,6 @@
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionMap {
@@ -15,7 +13,6 @@ public class FunctionMap {
     public List<Comment> comments;
 
 
-
     private FunctionMap(String functionName, int startLine, int endLine, List<Comment> comments) {
         this.functionName = functionName;
         this.startLine = startLine;
@@ -23,16 +20,14 @@ public class FunctionMap {
         this.comments = comments;
     }
 
-    public static FunctionMap createFunctionMap(MethodDeclaration md){
+    public static FunctionMap createFunctionMap(MethodDeclaration md) {
         String functionName = md.getNameAsString();
         int startLine = md.getRange().get().begin.line;
         int endLine = md.getRange().get().end.line;
 
         List<Comment> comments = md.getAllContainedComments();
 
-
-        return new FunctionMap(functionName,startLine,endLine,comments);
+        return new FunctionMap(functionName, startLine, endLine, comments);
     }
-
 
 }
