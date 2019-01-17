@@ -19,13 +19,34 @@ public class StatisticsFromJson {
                 -> pathname.getName().endsWith(extension)));
         HashMap<CommentCategory,Integer> totalStatic = new HashMap<>();
         HashMap<CommentCategory,Integer> DocumentComments = new HashMap<>();
+
+
         for (File file : jsonFiles){
-            System.out.println(file.getName());
+            /*System.out.println(file.getName());
             System.out.println(getFileStat(file,true));
             System.out.println(getFileStat(file,false));
             System.out.println(getFileStatForDocumentCmt(file));
             combineMap(totalStatic,getFileStat(file,true));
-            combineMap(DocumentComments,getFileStatForDocumentCmt(file));
+            combineMap(DocumentComments,getFileStatForDocumentCmt(file));*/
+         /*   try {
+                List<FunctionMap> functionMaps = SourceFileUtil.getFunctionMapFormFile(
+                        new File(jsonFileNameToJavaName(file.getPath())));
+                CommentForCat[] commentForCats = parseFile(file);
+                functionMaps = getCommentsInFunctionMap(functionMaps,commentForCats);
+                System.out.println(file.getName());
+                for(FunctionMap functionMap: functionMaps){
+                    if(functionMap.commentForCats.size() > 0){
+                        System.out.println(functionMap.functionName);
+                        functionMap.commentForCats.forEach(e ->System.out.println(e.commentCategory));
+                    }
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+            printMethodCommentsCates(file);
+            System.out.println("\n");
 
         }
 
@@ -39,6 +60,42 @@ public class StatisticsFromJson {
         System.out.println(totalStatic);
         System.out.println(DocumentComments);
 
+
+    }
+    private static void addNewComment(Map<CommentCategory,Integer> map,CommentCategory category){
+        if (!map.containsKey(category)){
+            map.put(category,new Integer(1));
+        }else{
+            int newValue = map.get(category).intValue() + 1;
+            map.replace(category, new Integer(newValue));
+        }
+    }
+
+    private static void printMethodCommentsCates(File jsonFile){
+        Map<CommentCategory,Integer> functionCommentCateStat = new HashMap<>();
+        try {
+            List<FunctionMap> functionMaps = SourceFileUtil.getFunctionMapFormFile(
+                    new File(jsonFileNameToJavaName(jsonFile.getPath())));
+            CommentForCat[] commentForCats = parseFile(jsonFile);
+            functionMaps = getCommentsInFunctionMap(functionMaps,commentForCats);
+            System.out.println(jsonFile.getName());
+            for(FunctionMap functionMap: functionMaps){
+                if(functionMap.commentForCats.size() > 0){
+                    System.out.println("Method: " + functionMap.functionName);
+                    functionMap.commentForCats.forEach(e->addNewComment(functionCommentCateStat,e.commentCategory));
+                    System.out.println(functionCommentCateStat);
+                    functionCommentCateStat.clear();
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String jsonFileNameToJavaName(String jsonFileName){
+         return jsonFileName.substring(0,jsonFileName.lastIndexOf('.')).trim();
     }
 
     private  static Map<CommentCategory,Integer> combineMap(Map<CommentCategory,Integer> map1,
@@ -118,5 +175,15 @@ public class StatisticsFromJson {
        return result;
 
     }
+
+    public static List<FunctionMap> getCommentsInFunctionMap(List<FunctionMap> functionMaps,CommentForCat[] commentForCats){
+       for(FunctionMap functionMap: functionMaps){
+           functionMap.mapCommentForCatsToFunction(commentForCats);
+       }
+       return functionMaps;
+
+    }
+
+
 
 }

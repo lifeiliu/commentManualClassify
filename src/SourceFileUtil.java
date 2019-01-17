@@ -6,10 +6,7 @@ import com.github.javaparser.ast.comments.Comment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SourceFileUtil {
 
@@ -113,10 +110,14 @@ public class SourceFileUtil {
 
 
 
-  /*  public static void main(String[] args){
+    /*public static void main(String[] args){
       File file = new File("/home/ggff/Desktop/sourceCode/crawl4j/HtmlContentHandler.java");
         try {
-            getCommentsFromFile(file);
+            List<FunctionMap> map = getFunctionMapFormFile(file);
+            for(FunctionMap function : map){
+                System.out.println(function.functionName);
+                System.out.println(function.comments);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
