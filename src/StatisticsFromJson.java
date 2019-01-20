@@ -13,22 +13,29 @@ public class StatisticsFromJson {
     */
 
     public static void main(String[] args){
-        final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/android");
+        final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/crawl4j");
         final String extension = ".json";
         List<File> jsonFiles = Arrays.asList(jsonFileFolder.listFiles((File pathname)
                 -> pathname.getName().endsWith(extension)));
         HashMap<CommentCategory,Integer> totalStatic = new HashMap<>();
         HashMap<CommentCategory,Integer> DocumentComments = new HashMap<>();
-
+        HashMap<CommentCategory,Integer> otherComments = new HashMap<>();
+        int totalJavadoc = 0;
 
         for (File file : jsonFiles){
-            /*System.out.println(file.getName());
+
+
+            /*System.out.println("good comments count:" + countGoodCommnets(getFileStat(file,true)));
+            System.out.println("bad comments count:" + countBadComments(getFileStat(file,true)));
             System.out.println(getFileStat(file,true));
+
             System.out.println(getFileStat(file,false));
-            System.out.println(getFileStatForDocumentCmt(file));
+            System.out.println(getFileStatForDocumentCmt(file));*/
+            totalJavadoc += countJavaDocComment(parseFile(file));
             combineMap(totalStatic,getFileStat(file,true));
-            combineMap(DocumentComments,getFileStatForDocumentCmt(file));*/
-         /*   try {
+            combineMap(otherComments,getFileStat(file,false));
+            combineMap(DocumentComments,getFileStatForDocumentCmt(file));
+            /*try {
                 List<FunctionMap> functionMaps = SourceFileUtil.getFunctionMapFormFile(
                         new File(jsonFileNameToJavaName(file.getPath())));
                 CommentForCat[] commentForCats = parseFile(file);
@@ -44,9 +51,9 @@ public class StatisticsFromJson {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
             printMethodCommentsCates(file);
-            System.out.println("\n");
+            System.out.println("\n");*/
 
         }
 
@@ -56,11 +63,30 @@ public class StatisticsFromJson {
 
 
         });*/
-        System.out.println("\n\n");
-        System.out.println(totalStatic);
-        System.out.println(DocumentComments);
 
 
+        System.out.println("Javadoc: " + totalJavadoc);
+
+        System.out.println("GOOD COMMNETS in all: "+countGoodCommnets(totalStatic));
+        System.out.println("Bad COMMNETS in all: "+countBadComments(totalStatic));
+
+        System.out.println("GOOD COMMNETS in javadoc: "+countGoodCommnets(DocumentComments));
+        System.out.println("bad COMMNETS in javadoc: "+countBadComments(DocumentComments));
+
+        System.out.println("GOOD COMMNETS in OTHER: "+countGoodCommnets(otherComments));
+        System.out.println("bad COMMNETS in OTHER: "+countBadComments(otherComments));
+
+
+    }
+
+    private static int countJavaDocComment(CommentForCat[] comments){
+        int counter = 0;
+        for (CommentForCat comment : comments){
+            if(comment.commentType == CommentType.DocumentComment){
+                counter ++ ;
+            }
+        }
+        return counter;
     }
     private static void addNewComment(Map<CommentCategory,Integer> map,CommentCategory category){
         if (!map.containsKey(category)){
@@ -69,6 +95,31 @@ public class StatisticsFromJson {
             int newValue = map.get(category).intValue() + 1;
             map.replace(category, new Integer(newValue));
         }
+    }
+
+    private static int countGoodCommnets(Map<CommentCategory,Integer> commentStat){
+        int goodCommentsNumber = 0;
+
+        for (CommentCategory k : commentStat.keySet()){
+            if (k == CommentCategory.Amplification|| k == CommentCategory.Clarification
+                    || k == CommentCategory.Informative || k == CommentCategory.Intent || k == CommentCategory.JavaDoc
+                    || k == CommentCategory.Legal || k == CommentCategory.TODO || k == CommentCategory.Warning)
+                goodCommentsNumber += commentStat.get(k).intValue();
+        }
+        return goodCommentsNumber;
+    }
+
+    private static int countBadComments(Map<CommentCategory,Integer> commentStat){
+        int totalCommentsNumber = 0;
+        for (CommentCategory k : commentStat.keySet()){
+            totalCommentsNumber += commentStat.get(k).intValue();
+        }
+        return  totalCommentsNumber - (commentStat.get(CommentCategory.AlgorithmSummary) == null?
+                0 : commentStat.get(CommentCategory.AlgorithmSummary).intValue()) -
+                (commentStat.get(CommentCategory.OtherUndefined) == null?
+                        0 : commentStat.get(CommentCategory.OtherUndefined).intValue())
+                - countGoodCommnets(commentStat);
+
     }
 
     private static void printMethodCommentsCates(File jsonFile){

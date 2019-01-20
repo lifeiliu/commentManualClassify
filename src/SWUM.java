@@ -6,11 +6,9 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.ExpressionStmt;
-import com.github.javaparser.ast.stmt.ReturnStmt;
-import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
@@ -31,28 +29,52 @@ public class SWUM {
     public static Set<String> generateMethodSummary(MethodDeclaration md){
         Set <String> methodSummary = new HashSet<>();
 
-        Set<Statement> sUnits = endingOrVoidSUnit(md.getBody().get());
-        for(Statement each : sUnits){
-            methodSummary.addAll(WordsUtil.splitSentenceAndCamelWord(each.toString()));
+        Set<Statement> sUnits = new HashSet<>();
+        if(md.getBody().isPresent()){
+            BlockStmt methodBody = md.getBody().get();
+            sUnits.addAll(endingSUnit(methodBody));
+            sUnits.addAll(voidReturnSUnit(methodBody));
+            sUnits.addAll(dataFacilitatingSUnit(sUnits,methodBody));
+            for(Statement each : sUnits){
+                methodSummary.addAll(WordsUtil.splitSentenceAndCamelWord(each.toString()));
+            }
         }
+
         return methodSummary;
     }
 
 
-    private static Set<Statement> endingOrVoidSUnit(BlockStmt methodBody){
-        Set<Statement> result = new HashSet<>();
+    private static List<Statement> endingSUnit(BlockStmt methodBody){
+        List<Statement> result = new ArrayList<>();
 
         NodeList<Statement> statements = methodBody.getStatements();
 
         for(Statement each : statements){
-            if(each.isReturnStmt() || (!each.isExpressionStmt() && !each.isBreakStmt() &&!each.isContinueStmt()
-            &&!each.isAssertStmt() && !each.isThrowStmt() && !each.isUnparsableStmt())){
+            if(each.isReturnStmt() && !each.toString().contains("null")){
                 each.removeComment();
                 result.add(each);
             }
         }
 
         result.add(statements.get(statements.size() - 1));
+
+        return result;
+
+    }
+
+    /*An s unit which has a method call
+    that does not return a value or whose return value is not as-
+    signed to a variable is a void-return s unit.*/
+    private static Set<Statement> voidReturnSUnit(BlockStmt methodBody){
+        Set<Statement> result = new HashSet<>();
+        List<Statement> methodCalls = new ArrayList<>();
+        new MethodCallVisitor().visit(methodBody,methodCalls);
+
+        for(Statement s : methodCalls){
+            if (s.findAll(MethodCallExpr.class).contains("="))
+                methodCalls.remove(s);
+        }
+        result.addAll(methodCalls);
         return result;
 
     }
@@ -61,26 +83,76 @@ public class SWUM {
 
 
 
-    private static List<Statement>  dataFacilitatingSUnit(Set<Statement> SUnits){
-        List<String> variableNames = new ArrayList<>();
+    private static Set<Statement>  dataFacilitatingSUnit(Set<Statement> SUnits, BlockStmt
+                                                           methodBoby){
+        Set<String> variableNames = new HashSet<>();
+        Set<Statement> result = new HashSet<>();
+        for(Statement s : SUnits){
+            if (s instanceof ReturnStmt){
+                if (((ReturnStmt) s).getExpression().isPresent()){
+                    Expression expression = ((ReturnStmt) s).getExpression().get();
+                    if (expression instanceof NameExpr){
+                        variableNames.add(((NameExpr) expression).getNameAsString());
+                    }
+                }
+            }
+            s.getChildNodes().forEach(e-> {
+                if (e instanceof MethodCallExpr){
+                    ((MethodCallExpr) e).getArguments().forEach(a -> {
+                        if(a instanceof NameExpr){
+                            variableNames.add(((NameExpr) a).getNameAsString());
+                        }
+                    });
+                }
+            });
 
+        }
 
-        System.out.println(variableNames);
-        return null;
+        //System.out.println(variableNames);
+        Set<Statement> assignmentStatement = new HashSet<>();
+
+        new AssignmentVisitor().visit(methodBoby,assignmentStatement);
+        System.out.println("Assginment statement:" + assignmentStatement);
+
+        for (Statement s : methodBoby.getStatements()){
+            if(assignmentStatement.contains(s)){
+                for (String name: variableNames){
+                    if (s.toString().contains(name))
+                        result.add(s);
+                }
+            }
+
+        }
+
+        return result;
 
     }
 
 
-    private static class AssignmentVisitor extends VoidVisitorAdapter<List<Statement>>{
+    private static class MethodCallVisitor extends VoidVisitorAdapter<List<Statement>>{
         @Override
-        public void visit(AssignExpr n, List<Statement> collector) {
-            super.visit(n,collector);
-
+        public void visit(MethodCallExpr n, List<Statement> arg) {
+            super.visit(n, arg);
             if(n.getParentNode().isPresent()){
                 Node parent = n.getParentNode().get();
                 if(parent instanceof Statement){
-                    collector.add((Statement) parent);
-                    System.out.println(parent);
+                    arg.add((Statement) parent.removeComment());
+                    //System.out.println(parent);
+                }
+            }
+
+        }
+    }
+
+    private static class AssignmentVisitor extends VoidVisitorAdapter<Set<Statement>>{
+        @Override
+        public void visit(AssignExpr n, Set<Statement> collector) {
+            super.visit(n,collector);
+
+            if (n.getParentNode().isPresent()){
+                Node parenet = n.getParentNode().get();
+                if (parenet instanceof Statement){
+                    collector.add((Statement) parenet);
                 }
             }
 
@@ -103,23 +175,31 @@ public class SWUM {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        File sourceFile = new File("/home/ggff/workplace/maven/maven/maven-core/src/main/java/org/apache/maven/ReactorReader.java");
+        String path ="/home/ggff/workplace/maven/maven/maven-core/src/main/java/org/apache/maven/settings/SettingsUtils.java";
+        File sourceFile = new File(path);
         CompilationUnit cu = JavaParser.parse(sourceFile);
         List<MethodDeclaration> methodDeclarations = cu.findAll(MethodDeclaration.class);
         /*MethodDeclaration aMethod = methodDeclarations.get(methodDeclarations.size()-3);
         System.out.println(aMethod);
         List<String> returnAvariables = new ArrayList<>();
         new ReturnStmtVisitor().visit(aMethod,returnAvariables);
-        System.out.println(returnAvariables);
-        List<Statement> sUnits = new ArrayList<>();*/
+        System.out.println(returnAvariables);*/
+        List<Statement> dataFacilitaing = new ArrayList<>();
         for(MethodDeclaration md:methodDeclarations){
+            if(md.getBody().isPresent()){
+                Set<Statement> sUnits = voidReturnSUnit(md.getBody().get());
+                System.out.println(sUnits);
+                dataFacilitaing.addAll(dataFacilitatingSUnit(sUnits,md.getBody().get()));
 
-            System.out.println(md);
-            System.out.println();
+            }
+
+
+            System.out.println(dataFacilitaing);
+            dataFacilitaing.clear();
+            System.out.println(md.toString());
             System.out.println(generateMethodSummary(md));
             System.out.println("\n");
         }
-
 
 
 
