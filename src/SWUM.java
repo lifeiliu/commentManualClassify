@@ -10,6 +10,7 @@ import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.printer.YamlPrinter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,17 +26,29 @@ import java.util.*;
             Summary Comments for Java Methods"
 
  */
+
 public class SWUM {
     public static Set<String> generateMethodSummary(MethodDeclaration md){
         Set <String> methodSummary = new HashSet<>();
-
         Set<Statement> sUnits = new HashSet<>();
+        Set<Statement> dataFaciSUnits ;
+
         if(md.getBody().isPresent()){
             BlockStmt methodBody = md.getBody().get();
             sUnits.addAll(endingSUnit(methodBody));
+            System.out.println("ending Sunits: " +sUnits);
+            System.out.println("void return Sunits: " +voidReturnSUnit(methodBody));
             sUnits.addAll(voidReturnSUnit(methodBody));
-            sUnits.addAll(dataFacilitatingSUnit(sUnits,methodBody));
+            System.out.println("ending and void return Sunits: " +sUnits);
+
+            dataFaciSUnits = dataFacilitatingSUnit(sUnits,methodBody);
+            System.out.println("dataFaciSUnit: " + dataFaciSUnits);
+            sUnits.addAll(dataFaciSUnits);
+            System.out.println("all units: " +sUnits);
+
+
             for(Statement each : sUnits){
+                each.removeComment();
                 methodSummary.addAll(WordsUtil.splitSentenceAndCamelWord(each.toString()));
             }
         }
@@ -55,8 +68,10 @@ public class SWUM {
                 result.add(each);
             }
         }
+        if (result.size() == 0 && statements.size() > 1){
+            result.add(statements.get(statements.size() - 1));
+        }
 
-        result.add(statements.get(statements.size() - 1));
 
         return result;
 
@@ -68,6 +83,7 @@ public class SWUM {
     private static Set<Statement> voidReturnSUnit(BlockStmt methodBody){
         Set<Statement> result = new HashSet<>();
         List<Statement> methodCalls = new ArrayList<>();
+
         new MethodCallVisitor().visit(methodBody,methodCalls);
 
         for(Statement s : methodCalls){
@@ -87,6 +103,7 @@ public class SWUM {
                                                            methodBoby){
         Set<String> variableNames = new HashSet<>();
         Set<Statement> result = new HashSet<>();
+
         for(Statement s : SUnits){
             if (s instanceof ReturnStmt){
                 if (((ReturnStmt) s).getExpression().isPresent()){
@@ -108,19 +125,17 @@ public class SWUM {
 
         }
 
-        //System.out.println(variableNames);
+        System.out.println( "variables: " + variableNames);
         Set<Statement> assignmentStatement = new HashSet<>();
 
         new AssignmentVisitor().visit(methodBoby,assignmentStatement);
         System.out.println("Assginment statement:" + assignmentStatement);
 
-        for (Statement s : methodBoby.getStatements()){
-            if(assignmentStatement.contains(s)){
+        for (Statement s : assignmentStatement){
                 for (String name: variableNames){
                     if (s.toString().contains(name))
                         result.add(s);
                 }
-            }
 
         }
 
@@ -149,14 +164,15 @@ public class SWUM {
         public void visit(AssignExpr n, Set<Statement> collector) {
             super.visit(n,collector);
 
+
             if (n.getParentNode().isPresent()){
                 Node parenet = n.getParentNode().get();
-                if (parenet instanceof Statement){
-                    collector.add((Statement) parenet);
+                if (parenet instanceof ExpressionStmt){
+                    collector.add((ExpressionStmt) parenet);
                 }
             }
 
-
+        System.out.println("AssignmentVisitor: " + collector);
 
         }
     }
@@ -175,30 +191,22 @@ public class SWUM {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        String path ="/home/ggff/workplace/maven/maven/maven-core/src/main/java/org/apache/maven/settings/SettingsUtils.java";
+        String path ="/home/ggff/Desktop/sourceCode/mavenSample/DebugResolutionListener.java";
         File sourceFile = new File(path);
         CompilationUnit cu = JavaParser.parse(sourceFile);
+
+
         List<MethodDeclaration> methodDeclarations = cu.findAll(MethodDeclaration.class);
-        /*MethodDeclaration aMethod = methodDeclarations.get(methodDeclarations.size()-3);
-        System.out.println(aMethod);
-        List<String> returnAvariables = new ArrayList<>();
-        new ReturnStmtVisitor().visit(aMethod,returnAvariables);
-        System.out.println(returnAvariables);*/
-        List<Statement> dataFacilitaing = new ArrayList<>();
+
         for(MethodDeclaration md:methodDeclarations){
+
             if(md.getBody().isPresent()){
-                Set<Statement> sUnits = voidReturnSUnit(md.getBody().get());
-                System.out.println(sUnits);
-                dataFacilitaing.addAll(dataFacilitatingSUnit(sUnits,md.getBody().get()));
+                System.out.println(md.toString());
+                System.out.println(generateMethodSummary(md));
+                System.out.println("\n");
 
             }
 
-
-            System.out.println(dataFacilitaing);
-            dataFacilitaing.clear();
-            System.out.println(md.toString());
-            System.out.println(generateMethodSummary(md));
-            System.out.println("\n");
         }
 
 

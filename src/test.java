@@ -26,9 +26,9 @@ public class test {
         String path = "/home/ggff/workplace/maven/maven/maven-core/src/main/java/org/apache/maven/artifact/handler/manager/DefaultArtifactHandlerManager.java";
         CompilationUnit cu = JavaParser.parse(new File(path));
         //CompilationUnit cu = JavaParser.parse("class X{int medthodX() { int x; x = methodB(10); if(x > 10){ x = 10 -1;} return x; }}");
-        YamlPrinter printer = new YamlPrinter(true);
+        /*YamlPrinter printer = new YamlPrinter(true);
         System.out.println(printer.output(cu));
-        /*DotPrinter printer = new DotPrinter(true);
+        DotPrinter printer = new DotPrinter(true);
         try (FileWriter fileWriter = new FileWriter("ast.dot");
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.print(printer.output(cu));
@@ -46,7 +46,7 @@ public class test {
 
     private static class AssignmentVisitor extends VoidVisitorAdapter<Set<Statement>>{
         @Override
-        public void visit(ExpressionStmt n, Set<Statement> collector) {
+        public void visit(AssignExpr n, Set<Statement> collector) {
             super.visit(n,collector);
 
 
@@ -56,6 +56,11 @@ public class test {
                     collector.add((ExpressionStmt) parenet);
                 }
             }
+            /*if((n.getAncestorOfType(ExpressionStmt.class).isPresent())){
+                System.out.println(n.getAncestorOfType(ExpressionStmt.class));
+                collector.add((Statement) n.getAncestorOfType(ExpressionStmt.class).get());
+            }*/
+
 
 
 
