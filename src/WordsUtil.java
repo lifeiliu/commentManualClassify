@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class WordsUtil {
 
@@ -29,8 +27,35 @@ public class WordsUtil {
         return result;
     }
 
-    public static void main(String[] args){
-        String sentence = "will you'll split don't. how are you today! {hdjh dhjskh, return 2;}";
-        System.out.println(splitSentence(sentence));
+    public static String getDocCommentDestcription(String docComment){
+        String description = docComment.split("@")[0];
+        return description;
     }
+
+    public static List<String> filterStopWords(Collection<String> collection, Set<String> stopWords){
+        List<String> result = new ArrayList<>();
+        for (String each : collection){
+            if (! stopWords.contains(each)){
+                result.add(each);
+            }
+        }
+        return result;
+    }
+
+
+
+    public static void main(String[] args){
+
+        Set<String> stopwords = new HashSet<>();
+        stopwords.add("are");
+        stopwords.add("you");
+        stopwords.add("don't");
+        String sentence = "will you'll split don't. how are you today! {@hdjh dhjskh, return 2;}";
+        System.out.println(getDocCommentDestcription(sentence));
+        List<String> split = splitSentence(sentence);
+
+        System.out.println(filterStopWords(split,stopwords));
+
+    }
+
 }
