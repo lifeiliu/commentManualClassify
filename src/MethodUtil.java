@@ -54,6 +54,12 @@ public class MethodUtil {
 
     }
 
+    public static Set<String> methodCodeSummary(MethodDeclaration md){
+        Set<String> codeSummary = new HashSet<>();
+        codeSummary.addAll(getSignatureWords(md));
+        codeSummary.addAll(SWUM.generateMethodSummary(md));
+        return codeSummary;
+    }
 
 
     public static void main(String[] args) throws FileNotFoundException {

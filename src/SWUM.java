@@ -46,6 +46,10 @@ public class SWUM {
             sUnits.addAll(dataFaciSUnits);
             System.out.println("all units: " +sUnits);
 
+            Set<Statement> controllingSUnit = controllingSUint(sUnits);
+            System.out.println("controlling statements: " + controllingSUnit);
+            sUnits.addAll(controllingSUnit);
+
 
             for(Statement each : sUnits){
                 each.removeComment();
@@ -143,6 +147,46 @@ public class SWUM {
 
     }
 
+    private static Set<Statement> controllingSUint(Set<Statement> SUnits){
+        Set<Statement> result = new HashSet<>();
+        Set<Expression> conditionExprs = new HashSet<>();
+        for(Statement each : SUnits){
+            Node parent = each.getParentNode().get();
+            while(parent instanceof Statement){
+
+                if ( parent instanceof IfStmt){
+                    conditionExprs.add(((IfStmt) parent).getCondition());
+                    break;
+                }
+                if(parent instanceof ForStmt){
+                    if (((ForStmt) parent).getCompare().isPresent()){
+                        conditionExprs.add(((ForStmt) parent).getCompare().get());
+                        break;
+                    }
+
+                }
+                if(parent instanceof WhileStmt){
+                    conditionExprs.add(((WhileStmt) parent).getCondition());
+                    break;
+                }
+                if(parent.getParentNode().isPresent()){
+                    parent = parent.getParentNode().get();
+                }else
+                    break;
+
+            }
+
+        }
+        for (Expression each : conditionExprs){
+            result.add(new ExpressionStmt(each));
+        }
+        return result;
+
+    }
+
+
+
+
 
     private static class MethodCallVisitor extends VoidVisitorAdapter<List<Statement>>{
         @Override
@@ -203,6 +247,7 @@ public class SWUM {
             if(md.getBody().isPresent()){
                 System.out.println(md.toString());
                 System.out.println(generateMethodSummary(md));
+
                 System.out.println("\n");
 
             }
