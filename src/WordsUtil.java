@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class WordsUtil {
@@ -14,7 +15,8 @@ public class WordsUtil {
 
     public static List<String> splitSentence(String sentence){
 
-        String[] words = sentence.split("[\\W+&&[^\"']]");
+//        String[] words = sentence.split("[\\W+&&[^\"']]");
+        String[] words = sentence.split("[\\W+]");
         return Arrays.asList(words);
     }
 
@@ -29,7 +31,7 @@ public class WordsUtil {
 
     public static String getDocCommentDestcription(String docComment){
         String description = docComment.split("@")[0];
-        return description;
+        return description.trim();
     }
 
     public static List<String> filterStopWords(Collection<String> collection, Set<String> stopWords){
@@ -42,14 +44,27 @@ public class WordsUtil {
         return result;
     }
 
+    public static Set<String> generateStopWords(){
+        Set<String> stopWords = new HashSet<>();
+        String path = "StopWords.txt";
+        File stopWordTxt = new File(path);
+        try (BufferedReader br = new BufferedReader(new FileReader(stopWordTxt))) {
+            String word;
+            while ( (word = br.readLine()) != null){
+                stopWords.add(word);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stopWords;
+    }
 
 
     public static void main(String[] args){
 
-        Set<String> stopwords = new HashSet<>();
-        stopwords.add("are");
-        stopwords.add("you");
-        stopwords.add("don't");
+        Set<String> stopwords = generateStopWords();
         String sentence = "will you'll split don't. how are you today! {@hdjh dhjskh, return 2;}";
         System.out.println(getDocCommentDestcription(sentence));
         List<String> split = splitSentence(sentence);

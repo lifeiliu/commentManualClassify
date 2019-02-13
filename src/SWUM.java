@@ -28,8 +28,8 @@ import java.util.*;
  */
 
 public class SWUM {
-    public static Set<String> generateMethodSummary(MethodDeclaration md){
-        Set <String> methodSummary = new HashSet<>();
+    public static List<String> generateMethodSummary(MethodDeclaration md){
+        List <String> methodSummary = new ArrayList<>();
         Set<Statement> sUnits = new HashSet<>();
         Set<Statement> dataFaciSUnits ;
 
@@ -53,7 +53,7 @@ public class SWUM {
 
             for(Statement each : sUnits){
                 each.removeComment();
-                methodSummary.addAll(WordsUtil.splitSentenceAndCamelWord(each.toString()));
+                methodSummary.addAll(WordsUtil.splitCamelWord(each.toString()));
             }
         }
 

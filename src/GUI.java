@@ -2,9 +2,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Application;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
