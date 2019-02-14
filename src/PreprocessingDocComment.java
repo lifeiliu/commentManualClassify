@@ -1,4 +1,5 @@
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 public class PreprocessingDocComment {
@@ -32,7 +33,7 @@ public class PreprocessingDocComment {
     public PreprocessingDocComment Preprocessing(CommentForCat comment){
         String commentID = getCommentID(comment);
         CommentLocation location = getLocation(comment);
-        double jaccardSimilarity = getJaccardSimilarity();
+        double jaccardSimilarity = getJaccardSimilarity(comment);
         double cosineSimilarity = getCosineSimilarity();
         int lengthOfDescription = getLengthOfDescription(comment);
         int numOfAttribute = getNumOfAttribute(comment);
@@ -62,10 +63,19 @@ public class PreprocessingDocComment {
     }
 
     public double getJaccardSimilarity(CommentForCat comment) {
-        if(comment.commentLocation != CommentLocation.MethodTopComment){
-            return -1;
+        if (comment.methodSignature.equals("") || comment.text.equals("")){
+            return 0;
         }
-        String
+        String docmentCommentDescription =WordsUtil.getDocCommentDestcription(comment.text);
+        List<String> filteredCommentWords = WordsUtil.filterStopWords(WordsUtil.splitSentenceAndCamelWord(docmentCommentDescription),
+                                                                    WordsUtil.generateStopWords());
+        String processedCommentText = "";
+        for (String word : filteredCommentWords){
+            processedCommentText += word;
+        }
+
+        Similarity similarity = new Similarity();
+        return similarity.jaccardSimilarity(comment.methodSignature,processedCommentText);
     }
 
     public double getCosineSimilarity() {

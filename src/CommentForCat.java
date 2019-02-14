@@ -1,3 +1,5 @@
+import com.github.javaparser.JavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
@@ -7,6 +9,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class CommentForCat {
     public String text;
@@ -19,6 +25,8 @@ public class CommentForCat {
     public CommentType commentType;
     public CommentLocation commentLocation;
     public CommentCategory commentCategory;
+    public String methodSignature;
+    public String filteredMethodSummary;
 
     public CommentForCat(String text, String fileName) {
         this.text = text;
@@ -37,6 +45,19 @@ public class CommentForCat {
 
     }
 
+    public CommentForCat(String text, String commentedCode,CommentLocation location,
+                         int lineStartNumber, int lineEndNumber,CommentType type,
+                         String methodSignature, String filteredMethodSummary) {
+        this.text = text;
+        this.commentedCode = commentedCode;
+        this.lineStartNumber = lineStartNumber;
+        this.lineEndNumber = lineEndNumber;
+        this.commentLocation = location;
+        this.commentType = type;
+        this.methodSignature = methodSignature;
+        this.filteredMethodSummary = filteredMethodSummary;
+    }
+
     public void setCommentCategory (CommentCategory category){
         this.commentCategory = category;
     }
@@ -48,8 +69,11 @@ public class CommentForCat {
         int lineStartNumber = getLineStartNumber(comment);
         int lineEndNumber = getLineEndNumber(comment);
         String commentedCode = getCommentedCode(comment);
+        String methodSignature = getMethodSignature(comment);
+        String filteredSummary = getFilteredmethodSummary(comment);
 
-        return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType);
+        return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType,
+                methodSignature,filteredSummary);
 
     }
 
@@ -93,6 +117,51 @@ public class CommentForCat {
         return comment.getCommentedNode().get().removeComment().toString();
     }
 
+    public static String getMethodSignature(Comment comment){
+        String result = "";
+        if(comment.getCommentedNode().isPresent()) {
+            Node commentedCode = comment.getCommentedNode().get();
+            if (commentedCode instanceof MethodDeclaration) {
+                MethodDeclaration md = (MethodDeclaration) commentedCode;
+                Set<String> signatureWords = MethodUtil.getSignatureWords(md);
+                for (String word : signatureWords) {
+                    result += word;
+                }
+            }
+        }
+
+
+
+        return result;
+    }
+
+
+    public static String getFilteredmethodSummary(Comment comment){
+        String result = "";
+        List<String> methodwords = new ArrayList<>();
+
+        if(comment.getCommentedNode().isPresent()) {
+            Node commentedCode = comment.getCommentedNode().get();
+            if (commentedCode instanceof MethodDeclaration) {
+                MethodDeclaration md = (MethodDeclaration) commentedCode;;
+                Set<String> methodSummary = SWUM.generateMethodSummary(md);
+                for(String statement : methodSummary){
+                    methodwords.addAll(WordsUtil.splitSentenceAndCamelWord(statement));
+                }
+                List <String> filteredWords = WordsUtil.filterStopWords(methodwords,WordsUtil.generateStopWords());
+                for(String word : filteredWords){
+                    result += word;
+                }
+
+                result += getMethodSignature(comment);
+            }
+
+        }
+
+
+        System.out.println(result);
+        return result;
+    }
     public String toString(){
         if (text.length() >= 50){
             return lineStartNumber + text.substring(0,50);
@@ -106,5 +175,15 @@ public class CommentForCat {
         return json;
     }
 
+    public static void main(String[] args) throws FileNotFoundException {
+        String path ="/home/ggff/Desktop/sourceCode/mavenSample/DebugResolutionListener.java";
+        File sourceFile = new File(path);
+        CompilationUnit cu = JavaParser.parse(sourceFile);
+        List<Comment> comments = cu.getComments();
+
+        for (Comment comment: comments){
+            getFilteredmethodSummary(comment);
+        }
+    }
 
 }

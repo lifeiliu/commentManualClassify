@@ -28,26 +28,26 @@ import java.util.*;
  */
 
 public class SWUM {
-    public static List<String> generateMethodSummary(MethodDeclaration md){
-        List <String> methodSummary = new ArrayList<>();
+    public static Set<String> generateMethodSummary(MethodDeclaration md){
+        Set <String> methodSummary = new HashSet<>();
         Set<Statement> sUnits = new HashSet<>();
         Set<Statement> dataFaciSUnits ;
 
         if(md.getBody().isPresent()){
             BlockStmt methodBody = md.getBody().get();
             sUnits.addAll(endingSUnit(methodBody));
-            System.out.println("ending Sunits: " +sUnits);
-            System.out.println("void return Sunits: " +voidReturnSUnit(methodBody));
+//            System.out.println("ending Sunits: " +sUnits);
+//            System.out.println("void return Sunits: " +voidReturnSUnit(methodBody));
             sUnits.addAll(voidReturnSUnit(methodBody));
-            System.out.println("ending and void return Sunits: " +sUnits);
+//            System.out.println("ending and void return Sunits: " +sUnits);
 
             dataFaciSUnits = dataFacilitatingSUnit(sUnits,methodBody);
-            System.out.println("dataFaciSUnit: " + dataFaciSUnits);
+//            System.out.println("dataFaciSUnit: " + dataFaciSUnits);
             sUnits.addAll(dataFaciSUnits);
-            System.out.println("all units: " +sUnits);
+//            System.out.println("all units: " +sUnits);
 
             Set<Statement> controllingSUnit = controllingSUint(sUnits);
-            System.out.println("controlling statements: " + controllingSUnit);
+//            System.out.println("controlling statements: " + controllingSUnit);
             sUnits.addAll(controllingSUnit);
 
 
@@ -129,11 +129,11 @@ public class SWUM {
 
         }
 
-        System.out.println( "variables: " + variableNames);
+//        System.out.println( "variables: " + variableNames);
         Set<Statement> assignmentStatement = new HashSet<>();
 
         new AssignmentVisitor().visit(methodBoby,assignmentStatement);
-        System.out.println("Assginment statement:" + assignmentStatement);
+//        System.out.println("Assginment statement:" + assignmentStatement);
 
         for (Statement s : assignmentStatement){
                 for (String name: variableNames){
@@ -216,7 +216,7 @@ public class SWUM {
                 }
             }
 
-        System.out.println("AssignmentVisitor: " + collector);
+//        System.out.println("AssignmentVisitor: " + collector);
 
         }
     }
