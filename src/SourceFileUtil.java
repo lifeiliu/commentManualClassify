@@ -108,11 +108,37 @@ public class SourceFileUtil {
         return comments;
     }
 
+    public static void getAllFiles(final File folder, List<File> files,String suffix){
+
+        for(File fileEntry : folder.listFiles()){
+            if (fileEntry.isDirectory()){
+                getAllFiles(fileEntry,files,suffix);
+            }else if (fileEntry.getName().endsWith(suffix)){
+                files.add(fileEntry);
+            }
+
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+      File folder = new File("/home/lifei/Desktop/sourceCode");
+      List<File> souceCodeFiles = new ArrayList<>();
+      List<File> jsonFiles = new ArrayList<>();
+      getAllFiles(folder,souceCodeFiles,".java");
+      getAllFiles(folder,jsonFiles,".json");
+      List<CommentForCat> allComments = new ArrayList<>();
+      for(File eachFile: souceCodeFiles){
+          allComments.addAll(getCommentsFromFile(eachFile));
+      }
+      List<CommentForCat> allFromJson = new ArrayList<>();
+      for (File each : jsonFiles){
+          allFromJson.addAll(Arrays.asList(StatisticsFromJson.parseFile(each)));
+      }
 
 
-    /*public static void main(String[] args){
-      File file = new File("/home/ggff/Desktop/sourceCode/crawl4j/HtmlContentHandler.java");
-        try {
+
+
+        /*try {
             List<FunctionMap> map = getFunctionMapFormFile(file);
             for(FunctionMap function : map){
                 System.out.println(function.functionName);
@@ -120,6 +146,9 @@ public class SourceFileUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }*/
+        }*/
+
+
+
+    }
 }
