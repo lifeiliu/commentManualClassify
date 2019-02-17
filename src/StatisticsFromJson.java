@@ -12,14 +12,31 @@ public class StatisticsFromJson {
     /*private static HashMap<String, HashMap<CommentCategory, Integer>> fileStatic = new HashMap<>();
     */
 
+    public static void getAllFiles(final File folder, List<File> files){
+
+        for(File fileEntry : folder.listFiles()){
+            if (fileEntry.isDirectory()){
+                getAllFiles(fileEntry,files);
+            }else if (fileEntry.getName().endsWith(".json")){
+                files.add(fileEntry);
+            }
+
+        }
+    }
+
+
+
     public static void main(String[] args){
-        final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/crawl4j");
+        final File jsonFileFolder = new File("/home/lifei/Desktop/sourceCode");
         final String extension = ".json";
-        List<File> jsonFiles = Arrays.asList(jsonFileFolder.listFiles((File pathname)
-                -> pathname.getName().endsWith(extension)));
+        List<File> jsonFiles = new ArrayList<>();
+        getAllFiles(jsonFileFolder,jsonFiles);
+
+
         HashMap<CommentCategory,Integer> totalStatic = new HashMap<>();
         HashMap<CommentCategory,Integer> DocumentComments = new HashMap<>();
         HashMap<CommentCategory,Integer> otherComments = new HashMap<>();
+        HashMap<CommentCategory,Integer> innerMethodComments = new HashMap<>();
         int totalJavadoc = 0;
 
         for (File file : jsonFiles){
@@ -35,6 +52,7 @@ public class StatisticsFromJson {
             combineMap(totalStatic,getFileStat(file,true));
             combineMap(otherComments,getFileStat(file,false));
             combineMap(DocumentComments,getFileStatForDocumentCmt(file));
+            combineMap(innerMethodComments,getFileInnerMethodComments(file));
             /*try {
                 List<FunctionMap> functionMaps = SourceFileUtil.getFunctionMapFormFile(
                         new File(jsonFileNameToJavaName(file.getPath())));
@@ -51,9 +69,10 @@ public class StatisticsFromJson {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            printMethodCommentsCates(file);
-            System.out.println("\n");*/
+            }*/
+            //printMethodCommentsCates(file);
+
+            //System.out.println("\n");
 
         }
 
@@ -66,7 +85,13 @@ public class StatisticsFromJson {
 
 
         System.out.println("Javadoc: " + totalJavadoc);
+        int totalCommentsCount = 0;
+        Collection<Integer> totalvalues =totalStatic.values();
 
+        for(Integer each : totalvalues){
+            totalCommentsCount += each.intValue();
+        }
+        System.out.println("total comments: " + totalCommentsCount);
         System.out.println("GOOD COMMNETS in all: "+countGoodCommnets(totalStatic));
         System.out.println("Bad COMMNETS in all: "+countBadComments(totalStatic));
 
@@ -76,6 +101,19 @@ public class StatisticsFromJson {
         System.out.println("GOOD COMMNETS in OTHER: "+countGoodCommnets(otherComments));
         System.out.println("bad COMMNETS in OTHER: "+countBadComments(otherComments));
 
+
+        System.out.println("category statistics of Document comments" + DocumentComments);
+        int innerMethodCommentsCount = 0;
+        Collection<Integer> values =innerMethodComments.values();
+
+        for(Integer each : values){
+            innerMethodCommentsCount += each.intValue();
+        }
+
+        System.out.println("inner method comments " + innerMethodCommentsCount);
+        System.out.println("GOOD COMMNETS : "+countGoodCommnets(innerMethodComments));
+        System.out.println("bad COMMNETS : "+countBadComments(innerMethodComments));
+        System.out.println("category statistcs of inner method comments" + innerMethodComments);
 
     }
 
@@ -225,6 +263,22 @@ public class StatisticsFromJson {
         }
        return result;
 
+    }
+
+    public static Map<CommentCategory,Integer> getFileInnerMethodComments(File jsonFile){
+        Map<CommentCategory,Integer> result = new HashMap<>();
+        CommentForCat[] comments = parseFile(jsonFile);
+
+        for (CommentForCat comment : comments){
+            if (comment.commentLocation == CommentLocation.MethodInnerComment){
+                if(!result.containsKey(comment.commentCategory))
+                    result.put(comment.commentCategory, 1);
+                else {
+                    result.replace(comment.commentCategory,result.get(comment.commentCategory)+1);
+                }
+            }
+        }
+        return  result;
     }
 
     public static List<FunctionMap> getCommentsInFunctionMap(List<FunctionMap> functionMaps,CommentForCat[] commentForCats){

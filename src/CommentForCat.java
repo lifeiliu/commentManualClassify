@@ -176,7 +176,8 @@ public class CommentForCat {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String path ="/home/ggff/Desktop/sourceCode/mavenSample/DebugResolutionListener.java";
+        String path ="/home/lifei/Desktop/sourceCode";
+
         File sourceFile = new File(path);
         CompilationUnit cu = JavaParser.parse(sourceFile);
         List<Comment> comments = cu.getComments();
