@@ -3,9 +3,9 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.Comment;
+import com.google.gson.GsonBuilder;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 public class SourceFileUtil {
@@ -120,8 +120,16 @@ public class SourceFileUtil {
         }
     }
 
+    public static void saveBeansToJson(List<CommentForCat> beans, File jsonFile) throws IOException {
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter(jsonFile));
+        bw.write(new GsonBuilder().setPrettyPrinting().create().toJson(beans));
+        bw.close();
+
+    }
+
     public static void main(String[] args) throws Exception {
-      File folder = new File("/home/lifei/Desktop/sourceCode");
+      File folder = new File("/home/ggff/Desktop/sourceCode");
       List<File> souceCodeFiles = new ArrayList<>();
       List<File> jsonFiles = new ArrayList<>();
       getAllFiles(folder,souceCodeFiles,".java");
@@ -135,6 +143,20 @@ public class SourceFileUtil {
           allFromJson.addAll(Arrays.asList(StatisticsFromJson.parseFile(each)));
       }
 
+      Map<String, CommentForCat> allCommentsInDict = new HashMap<>();
+
+      for (CommentForCat comment: allFromJson){
+          allCommentsInDict.put(comment.fileName + comment.lineStartNumber, comment);
+      }
+
+      for (CommentForCat comment : allComments){
+          if(allCommentsInDict.containsKey(comment.fileName+comment.lineStartNumber)){
+              comment.commentCategory = allCommentsInDict.get(comment.fileName+comment.lineStartNumber).commentCategory;
+          }
+      }
+
+      File jsonFile = new File("/home/ggff/Desktop/sourceCode/allcomments.json");
+      saveBeansToJson(allComments,jsonFile);
 
 
 
