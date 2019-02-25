@@ -27,10 +27,11 @@ public class StatisticsFromJson {
 
 
     public static void main(String[] args){
-        final File jsonFileFolder = new File("/home/lifei/Desktop/sourceCode");
+        final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/flinkSample");
         final String extension = ".json";
         List<File> jsonFiles = new ArrayList<>();
         getAllFiles(jsonFileFolder,jsonFiles);
+
 
 
         HashMap<CommentCategory,Integer> totalStatic = new HashMap<>();
