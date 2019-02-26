@@ -2,11 +2,17 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/GUI.java" line="67" />
-    <bookmark url="file://$PROJECT_DIR$/src/StatisticsFromJson.java" line="80" />
+    <bookmark url="file://$PROJECT_DIR$/src/StatisticsFromJson.java" line="81" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="647df78e-8d47-4b22-8ff4-7f90cf8aae56" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CommentForCat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommentForCat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PreprocessingDocComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PreprocessingDocComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SourceFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SourceFileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StatisticsFromJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StatisticsFromJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SourceFileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1890">
-              <caret line="134" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="2010">
+              <caret line="142" selection-start-line="142" selection-end-line="142" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,18 +38,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PreprocessingDocComment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+            <state relative-caret-position="930">
+              <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2403#2404#0" expanded="true" />
-                <element signature="e#2449#2450#0" expanded="true" />
-                <element signature="e#3284#3285#0" expanded="true" />
-                <element signature="e#3323#3324#0" expanded="true" />
-                <element signature="e#3521#3522#0" expanded="true" />
-                <element signature="e#3580#3581#0" expanded="true" />
-                <element signature="e#3639#3640#0" expanded="true" />
-                <element signature="e#3692#3693#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2325">
-              <caret line="175" column="5" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+            <state relative-caret-position="2370">
+              <caret line="174" column="5" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -196,7 +194,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551194480124" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551194825235" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -282,10 +280,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="-2" width="1920" height="1082" extended-state="6" />
+    <frame x="1600" y="89" width="1910" height="810" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4887324" visible="true" weight="0.20117396" />
-      <window_info id="Structure" order="1" sideWeight="0.5112676" side_tool="true" visible="true" weight="0.20117396" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48630136" visible="true" weight="0.20225322" />
+      <window_info id="Structure" order="1" sideWeight="0.51369864" side_tool="true" visible="true" weight="0.20225322" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -298,7 +296,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25498426" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.35682818" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.33801296" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32738718" />
@@ -537,8 +535,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SourceFileUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="2010">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -547,18 +545,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PreprocessingDocComment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+        <state relative-caret-position="930">
+          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2403#2404#0" expanded="true" />
-            <element signature="e#2449#2450#0" expanded="true" />
-            <element signature="e#3284#3285#0" expanded="true" />
-            <element signature="e#3323#3324#0" expanded="true" />
-            <element signature="e#3521#3522#0" expanded="true" />
-            <element signature="e#3580#3581#0" expanded="true" />
-            <element signature="e#3639#3640#0" expanded="true" />
-            <element signature="e#3692#3693#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -575,8 +565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2325">
-          <caret line="175" column="5" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+        <state relative-caret-position="2370">
+          <caret line="174" column="5" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

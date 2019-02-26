@@ -51,11 +51,7 @@ public class PreprocessingDocComment {
     }
 
     public boolean isPublic(CommentForCat comment) {
-        if(outMethod.contains(comment.commentLocation) && comment.commentedCode.startsWith("public")){
-            return true;
-        }else {
-            return false;
-        }
+        return outMethod.contains(comment.commentLocation) && comment.commentedCode.startsWith("public");
     }
 
     public CommentLocation getLocation(CommentForCat comment) {
@@ -95,10 +91,7 @@ public class PreprocessingDocComment {
     }
 
     public boolean isAuthorOnly(CommentForCat comment) {
-        if (getNumOfAttribute(comment) == 1 && comment.text.contains("@author") && getLengthOfDescription(comment) == 0){
-            return true ;
-        }
-        return false;
+        return getNumOfAttribute(comment) == 1 && comment.text.contains("@author") && getLengthOfDescription(comment) == 0;
     }
 
 

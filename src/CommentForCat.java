@@ -62,15 +62,16 @@ public class CommentForCat {
         this.commentCategory = category;
     }
 
-    public static CommentForCat convertFromComment(Comment comment){
+    public static CommentForCat convertFromComment(final Comment comment){
+        String methodSignature = getMethodSignature(comment);
+        String filteredSummary = getFilteredmethodSummary(comment);
         String text = comment.getContent();
         CommentType commentType = getCommentType(comment);
         CommentLocation commentLocation = getCommentLocation(comment);
         int lineStartNumber = getLineStartNumber(comment);
         int lineEndNumber = getLineEndNumber(comment);
         String commentedCode = getCommentedCode(comment);
-        String methodSignature = getMethodSignature(comment);
-        String filteredSummary = getFilteredmethodSummary(comment);
+
 
         return new CommentForCat(text,commentedCode,commentLocation,lineStartNumber,lineEndNumber,commentType,
                 methodSignature,filteredSummary);
@@ -118,32 +119,33 @@ public class CommentForCat {
     }
 
     public static String getMethodSignature(Comment comment){
-        String result = "";
+
+        String signature = " ";
         if(comment.getCommentedNode().isPresent()) {
+
             Node commentedCode = comment.getCommentedNode().get();
             if (commentedCode instanceof MethodDeclaration) {
                 MethodDeclaration md = (MethodDeclaration) commentedCode;
                 Set<String> signatureWords = MethodUtil.getSignatureWords(md);
+
                 for (String word : signatureWords) {
-                    result += word;
+                    signature += word;
                 }
             }
         }
 
-
-
-        return result;
+        return signature;
     }
 
 
     public static String getFilteredmethodSummary(Comment comment){
-        String result = "";
+        String result = " ";
         List<String> methodwords = new ArrayList<>();
 
         if(comment.getCommentedNode().isPresent()) {
             Node commentedCode = comment.getCommentedNode().get();
             if (commentedCode instanceof MethodDeclaration) {
-                MethodDeclaration md = (MethodDeclaration) commentedCode;;
+                MethodDeclaration md = (MethodDeclaration) commentedCode;
                 Set<String> methodSummary = SWUM.generateMethodSummary(md);
                 for(String statement : methodSummary){
                     methodwords.addAll(WordsUtil.splitSentenceAndCamelWord(statement));
@@ -157,9 +159,6 @@ public class CommentForCat {
             }
 
         }
-
-
-        System.out.println(result);
         return result;
     }
     public String toString(){
@@ -176,14 +175,25 @@ public class CommentForCat {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String path ="/home/lifei/Desktop/sourceCode";
+        String path ="/home/ggff/Desktop/sourceCode/android/ActivityThread.java";
 
         File sourceFile = new File(path);
         CompilationUnit cu = JavaParser.parse(sourceFile);
         List<Comment> comments = cu.getComments();
 
         for (Comment comment: comments){
-            getFilteredmethodSummary(comment);
+
+            CommentForCat commentForCat = convertFromComment(comment);
+
+            //String summary = getMethodSignature(comment);
+            //System.out.println(summary);
+            /*if(summary != " "){
+                CommentForCat commentForCat = convertFromComment(comment);
+               // commentForCat.methodSignature = summary;
+                System.out.println(commentForCat.methodSignature);
+                System.out.println(summary);
+            }*/
+
         }
     }
 
