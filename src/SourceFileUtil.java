@@ -49,6 +49,19 @@ public class SourceFileUtil {
         return result;
 
     }
+    public static List<RedundantPostprocessing> getCommentsForPreprocessing(File sourceFile) throws Exception {
+        List<RedundantPostprocessing> result = new ArrayList<>();
+        if (!verifySourceCode(sourceFile)) throw new Exception("not java file");
+        CompilationUnit cu = JavaParser.parse(sourceFile);
+        List<Comment> comments = combineMultiLineComment(cu.getComments());
+
+        for(Comment each : comments){
+            RedundantPostprocessing newRecord = new RedundantPostprocessing(each);
+            newRecord.commentId = sourceFile.getName()+ each.getBegin().get().line;
+            result.add(newRecord);
+        }
+        return result;
+    }
 
     public static List<FunctionMap> getFunctionMapFormFile(File sourceCodeFile) throws Exception{
         List<FunctionMap> results = new ArrayList<>();
@@ -88,7 +101,7 @@ public class SourceFileUtil {
 
     }
 
-    private static List combineMultiLineComment (List<Comment> comments){
+    public static List combineMultiLineComment (List<Comment> comments){
         comments.sort(new Comparator<Comment>() {
             @Override
             public int compare(Comment o1, Comment o2) {

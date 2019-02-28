@@ -30,8 +30,15 @@ public class WordsUtil {
     }
 
     public static String getDocCommentDestcription(String docComment){
-        String description = docComment.split("@")[0];
+        String description = docComment.split("[^{]@")[0];
         return description.trim();
+    }
+    public static String filterOutNonAlphaNumeric(String sentence){
+        if (sentence == null){
+            return null;
+        }
+        String result = sentence.replaceAll("[^a-zA-z0-9]","");
+        return result.toLowerCase();
     }
 
     public static List<String> filterStopWords(Collection<String> collection, Set<String> stopWords){
@@ -65,10 +72,10 @@ public class WordsUtil {
     public static void main(String[] args){
 
         Set<String> stopwords = generateStopWords();
-        String sentence = "will you'll split don't. how are you today! {@hdjh dhjskh, return 2;}";
+        String sentence = "will you'll split don't. how are you today! {@hdjh dhjskh,  @return 2;}";
         System.out.println(getDocCommentDestcription(sentence));
         List<String> split = splitSentence(sentence);
-
+        System.out.println(filterOutNonAlphaNumeric(sentence));
         System.out.println(filterStopWords(split,stopwords));
 
     }

@@ -151,30 +151,33 @@ public class SWUM {
         Set<Statement> result = new HashSet<>();
         Set<Expression> conditionExprs = new HashSet<>();
         for(Statement each : SUnits){
-            Node parent = each.getParentNode().get();
-            while(parent instanceof Statement){
+            if(each.getParentNode().isPresent()){
+                Node parent = each.getParentNode().get();
+                while(parent instanceof Statement){
 
-                if ( parent instanceof IfStmt){
-                    conditionExprs.add(((IfStmt) parent).getCondition());
-                    break;
-                }
-                if(parent instanceof ForStmt){
-                    if (((ForStmt) parent).getCompare().isPresent()){
-                        conditionExprs.add(((ForStmt) parent).getCompare().get());
+                    if ( parent instanceof IfStmt){
+                        conditionExprs.add(((IfStmt) parent).getCondition());
                         break;
                     }
+                    if(parent instanceof ForStmt){
+                        if (((ForStmt) parent).getCompare().isPresent()){
+                            conditionExprs.add(((ForStmt) parent).getCompare().get());
+                            break;
+                        }
+
+                    }
+                    if(parent instanceof WhileStmt){
+                        conditionExprs.add(((WhileStmt) parent).getCondition());
+                        break;
+                    }
+                    if(parent.getParentNode().isPresent()){
+                        parent = parent.getParentNode().get();
+                    }else
+                        break;
 
                 }
-                if(parent instanceof WhileStmt){
-                    conditionExprs.add(((WhileStmt) parent).getCondition());
-                    break;
-                }
-                if(parent.getParentNode().isPresent()){
-                    parent = parent.getParentNode().get();
-                }else
-                    break;
-
             }
+
 
         }
         for (Expression each : conditionExprs){
