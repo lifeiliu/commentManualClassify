@@ -27,7 +27,7 @@ public class StatisticsFromJson {
 
 
     public static void main(String[] args){
-        final File jsonFileFolder = new File("/home/ggff/Desktop/sourceCode/flinkSample");
+        final File jsonFileFolder = new File("/home/lifei/Desktop/sourceCode");
         final String extension = ".json";
         List<File> jsonFiles = new ArrayList<>();
         getAllFiles(jsonFileFolder,jsonFiles);
@@ -120,11 +120,15 @@ public class StatisticsFromJson {
 
     private static int countJavaDocComment(CommentForCat[] comments){
         int counter = 0;
-        for (CommentForCat comment : comments){
-            if(comment.commentType == CommentType.DocumentComment){
-                counter ++ ;
+        if(comments == null) return 0;
+        else {
+            for (CommentForCat comment : comments){
+                if(comment.commentType == CommentType.DocumentComment){
+                    counter ++ ;
+                }
             }
         }
+
         return counter;
     }
     private static void addNewComment(Map<CommentCategory,Integer> map,CommentCategory category){
@@ -224,6 +228,7 @@ public class StatisticsFromJson {
     public static Map<CommentCategory,Integer> getFileStat(File jsonFile,boolean withDocumentComment){
         Map<CommentCategory,Integer> result = new HashMap<>();
         CommentForCat[] comments = parseFile(jsonFile);
+        if(comments == null) return result;
         if(withDocumentComment){
             for(CommentForCat comment : comments){
                 if (!result.containsKey(comment.commentCategory))
@@ -252,6 +257,7 @@ public class StatisticsFromJson {
     public static Map<CommentCategory,Integer> getFileStatForDocumentCmt(File jsonFile){
         Map<CommentCategory,Integer> result = new HashMap<>();
         CommentForCat[] comments = parseFile(jsonFile);
+        if (comments == null) return result;
         for(CommentForCat comment : comments){
             if(comment.commentType==CommentType.DocumentComment){
                 if (!result.containsKey(comment.commentCategory))
@@ -269,7 +275,7 @@ public class StatisticsFromJson {
     public static Map<CommentCategory,Integer> getFileInnerMethodComments(File jsonFile){
         Map<CommentCategory,Integer> result = new HashMap<>();
         CommentForCat[] comments = parseFile(jsonFile);
-
+        if (comments == null) return result;
         for (CommentForCat comment : comments){
             if (comment.commentLocation == CommentLocation.MethodInnerComment){
                 if(!result.containsKey(comment.commentCategory))

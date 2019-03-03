@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/GUI.java" line="67" />
+    <bookmark url="file://$PROJECT_DIR$/src/StatisticsFromJson.java" line="81" />
+  </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="647df78e-8d47-4b22-8ff4-7f90cf8aae56" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="647df78e-8d47-4b22-8ff4-7f90cf8aae56" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/RedundantPostprocessing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StopWords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/StopWords.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CommentForCat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommentForCat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SWUM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SWUM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SourceFileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SourceFileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StatisticsFromJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StatisticsFromJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WordsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordsUtil.java" afterDir="false" />
+    </list>
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,58 +30,35 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Similarity.java">
+        <entry file="file://$PROJECT_DIR$/src/SourceFileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+            <state relative-caret-position="270">
+              <caret line="137" column="73" lean-forward="true" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RedundantPostprocessing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="25" column="52" lean-forward="true" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#686#687#0" expanded="true" />
+                <element signature="e#712#713#0" expanded="true" />
+                <element signature="e#1475#1476#0" expanded="true" />
+                <element signature="e#1539#1540#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SWUM.java">
+        <entry file="file://$PROJECT_DIR$/src/WordsUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PreprocessingDocComment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="15" column="38" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="84" column="9" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="173">
+              <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,26 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/StatisticsFromJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SourceFileUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="141" column="34" selection-start-line="141" selection-start-column="34" selection-end-line="141" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MethodUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+            <state relative-caret-position="255">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,11 +78,54 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1380">
+              <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4207#4208#0" expanded="true" />
+                <element signature="e#4249#4250#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="60" column="13" lean-forward="true" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Similarity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-217">
+              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SWUM.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="64">
               <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+=======
+            <state relative-caret-position="278">
+              <caret line="169" column="80" selection-start-line="169" selection-start-column="80" selection-end-line="169" selection-end-column="80" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -149,26 +169,30 @@
         <option value="$PROJECT_DIR$/src/CommentCategory.java" />
         <option value="$PROJECT_DIR$/src/ClassMap.java" />
         <option value="$PROJECT_DIR$/src/FunctionMap.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/test.java" />
         <option value="$PROJECT_DIR$/src/MethodUtil.java" />
-        <option value="$PROJECT_DIR$/StopWords.txt" />
         <option value="$PROJECT_DIR$/src/Similarity.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
+        <option value="$PROJECT_DIR$/src/PreprocessingDocComment.java" />
+        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
+        <option value="$PROJECT_DIR$/src/StatisticsFromJson.java" />
+        <option value="$PROJECT_DIR$/src/CommentForCat.java" />
+        <option value="$PROJECT_DIR$/src/DocCommentsFromCode.java" />
+        <option value="$PROJECT_DIR$/StopWords.txt" />
         <option value="$PROJECT_DIR$/src/WordsUtil.java" />
         <option value="$PROJECT_DIR$/src/SWUM.java" />
-        <option value="$PROJECT_DIR$/src/PreprocessingDocComment.java" />
         <option value="$PROJECT_DIR$/src/SourceFileUtil.java" />
-        <option value="$PROJECT_DIR$/src/test.java" />
-        <option value="$PROJECT_DIR$/src/CommentForCat.java" />
-        <option value="$PROJECT_DIR$/src/StatisticsFromJson.java" />
+        <option value="$PROJECT_DIR$/src/RedudantPreprocessing.java" />
+        <option value="$PROJECT_DIR$/src/RedundantPostprocessing.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="212" />
-    <option name="y" value="99" />
-    <option name="width" value="1218" />
-    <option name="height" value="654" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="98" />
+    <option name="y" value="62" />
+    <option name="width" value="1371" />
+    <option name="height" value="581" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -176,7 +200,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="commentManualClassify" type="58d84e3e:PackageViewProjectNode" />
+              <item name="commentManualClassify" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,15 +223,11 @@
               <item name="commentManualClassify" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="commentManualClassify" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -205,13 +235,16 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551061702706" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551348397825" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.45747125" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -225,7 +258,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GUI">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="CommentForCat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CommentForCat" />
       <module name="commentManualClassify" />
@@ -235,6 +268,13 @@
     </configuration>
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
+      <module name="commentManualClassify" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="commentManualClassify" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -261,20 +301,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test" />
-      <module name="commentManualClassify" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUI" />
-        <item itemvalue="Application.StatisticsFromJson" />
-        <item itemvalue="Application.CommentForCat" />
-        <item itemvalue="Application.test" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.WordsUtil" />
+        <item itemvalue="Application.StatisticsFromJson" />
+        <item itemvalue="Application.GUI" />
+        <item itemvalue="Application.CommentForCat" />
       </list>
     </recent_temporary>
   </component>
@@ -292,26 +325,33 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="67" y="25" width="1373" height="875" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48825502" visible="true" weight="0.26224566" />
       <window_info id="Structure" order="1" sideWeight="0.511745" side_tool="true" visible="true" weight="0.26224566" />
+=======
+    <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4875" visible="true" weight="0.18291862" />
+      <window_info id="Structure" order="1" sideWeight="0.5125" side_tool="true" visible="true" weight="0.18291862" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.39812332" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32841823" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35656837" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994638" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.20107238" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.25498426" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3378016" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32841823" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.33801296" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32707775" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24515772" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -321,6 +361,43 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18943436" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" weight="0.39812332" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.39848813" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.20107238" />
+=======
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32829374" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.33801296" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.32843652" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24515772" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -362,7 +439,80 @@
       </map>
     </option>
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ClassifyForm.form" />
+    <entry file="file://$PROJECT_DIR$/commentManualClassify.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommentType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommentCategory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClassMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.10.0/javaparser-core-3.10.0.jar!/com/github/javaparser/ast/visitor/VoidVisitor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="125" column="23" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ast.dot">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31215">
+          <caret line="2081" column="1" selection-start-line="2081" selection-start-column="1" selection-end-line="2081" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClassifyForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FunctionMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="51" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Optional.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -370,37 +520,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/WordsUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="46" column="47" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="47" />
+        <state>
+          <caret line="18" selection-start-line="18" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/META-INF/maven/com.google.code.gson/gson/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommentLocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DocCommentsFromCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#519#520#0" expanded="true" />
+            <element signature="e#569#570#0" expanded="true" />
+            <element signature="e#611#612#0" expanded="true" />
+            <element signature="e#644#645#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#887#888#0" expanded="true" />
+            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#967#968#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1061#1062#0" expanded="true" />
+            <element signature="e#1111#1112#0" expanded="true" />
+            <element signature="e#1151#1152#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1338#1339#0" expanded="true" />
+            <element signature="e#1380#1381#0" expanded="true" />
+            <element signature="e#1447#1448#0" expanded="true" />
+            <element signature="e#1509#1510#0" expanded="true" />
+            <element signature="e#1547#1548#0" expanded="true" />
+            <element signature="e#1584#1585#0" expanded="true" />
+            <element signature="e#1641#1642#0" expanded="true" />
+            <element signature="e#1693#1694#0" expanded="true" />
+            <element signature="e#1730#1731#0" expanded="true" />
+            <element signature="e#1765#1766#0" expanded="true" />
+            <element signature="e#1818#1819#0" expanded="true" />
+            <element signature="e#1859#1860#0" expanded="true" />
+            <element signature="e#1889#1890#0" expanded="true" />
+            <element signature="e#1918#1919#0" expanded="true" />
+            <element signature="e#1959#1960#0" expanded="true" />
+            <element signature="e#1995#1996#0" expanded="true" />
+            <element signature="e#2039#2040#0" expanded="true" />
+            <element signature="e#2070#2071#0" expanded="true" />
+            <element signature="e#2127#2128#0" expanded="true" />
+            <element signature="e#2167#2168#0" expanded="true" />
+            <element signature="e#2205#2206#0" expanded="true" />
+            <element signature="e#2241#2242#0" expanded="true" />
+            <element signature="e#2296#2297#0" expanded="true" />
+            <element signature="e#2339#2340#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/StopWords.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        <state relative-caret-position="1380">
+          <caret line="94" column="58" selection-start-line="94" selection-start-column="58" selection-end-line="94" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4207#4208#0" expanded="true" />
+            <element signature="e#4249#4250#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Similarity.java">
+    <entry file="file://$PROJECT_DIR$/src/StatisticsFromJson.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        <state relative-caret-position="255">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SWUM.java">
+    <entry file="file://$PROJECT_DIR$/src/MethodUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+        <state relative-caret-position="217">
+          <caret line="64" column="73" lean-forward="true" selection-start-line="64" selection-start-column="73" selection-end-line="64" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WordsUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -409,28 +658,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PreprocessingDocComment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="38" />
+        <state relative-caret-position="542">
+          <caret line="66" column="45" lean-forward="true" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test.java">
+    <entry file="file://$PROJECT_DIR$/src/SWUM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="84" column="9" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
+        <state relative-caret-position="278">
+          <caret line="169" column="80" selection-start-line="169" selection-start-column="80" selection-end-line="169" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CommentForCat.java">
+    <entry file="file://$PROJECT_DIR$/src/RedundantPostprocessing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="285">
+          <caret line="25" column="52" lean-forward="true" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#1475#1476#0" expanded="true" />
+            <element signature="e#1539#1540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Similarity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-217">
+          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -439,32 +702,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SourceFileUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="141" column="34" selection-start-line="141" selection-start-column="34" selection-end-line="141" selection-end-column="34" />
+        <state relative-caret-position="270">
+          <caret line="137" column="73" lean-forward="true" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MethodUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StatisticsFromJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="64">
           <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+=======
+        <state relative-caret-position="248">
+          <caret line="60" column="13" lean-forward="true" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+>>>>>>> a95fa30b374dd5222e0ac6c654dbeddad51379ea
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -494,7 +745,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.45747125" />
               </list>
             </option>
           </splitter-proportions>
@@ -513,11 +764,11 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.8.0_201</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.45747125" />
               </list>
             </option>
           </splitter-proportions>

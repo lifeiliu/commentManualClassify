@@ -78,12 +78,12 @@ public class CommentForCat {
 
     }
 
-    private static CommentType getCommentType(Comment comment){
+    public static CommentType getCommentType(Comment comment){
         if (comment.isJavadocComment()) return CommentType.DocumentComment;
         else return CommentType.RegularComment;
     }
 
-    private static CommentLocation getCommentLocation(Comment comment){
+    public static CommentLocation getCommentLocation(Comment comment){
         if(!comment.getCommentedNode().isPresent()) return  CommentLocation.OrphanComment;
         Node node = comment.getCommentedNode().get();
         if (node instanceof ClassOrInterfaceDeclaration) return CommentLocation.ClassTopComment;
@@ -105,14 +105,18 @@ public class CommentForCat {
 
 
 
-    private static int getLineStartNumber(Comment comment){
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public static int getLineStartNumber(Comment comment){
         return comment.getRange().get().begin.line;
     }
-    private static int getLineEndNumber(Comment comment){
+    public static int getLineEndNumber(Comment comment){
         return comment.getRange().get().end.line;
     }
 
-    private static String getCommentedCode(Comment comment){
+    public static String getCommentedCode(Comment comment){
         if (! comment.getCommentedNode().isPresent())
             return null;
         return comment.getCommentedNode().get().removeComment().toString();
